@@ -12,7 +12,18 @@ class minHeap{
         this.arr.push(item);
 
         //Bubble up to correct spot
-        
+        if(this.arr.length > 1){
+            let currIdx = this.arr.length - 1;
+            while(currIdx > 1 && this.arr[Math.floor(currIdx/2)].timestamp > this.arr[currIdx].timestamp){
+                //swap positions
+                let temp = this.arr[currIdx];
+                this.arr[currIdx] = this.arr[Math.floor(currIdx/2)];
+                this.arr[Math.floor(currIdx/2)] = temp;
+
+
+                currIdx = Math.floor(currIdx/2)
+            }
+        }
     }
 }
 
@@ -44,6 +55,14 @@ class Db{
     }
 }
 
-let fake_db = new Db()
+let fakeDb = new Db()
 
-module.exports = fake_db;
+// let testHeap = new minHeap()
+// testHeap.insert({timestamp: 5})
+// testHeap.insert({timestamp: 4})
+// testHeap.insert({timestamp: 3})
+// testHeap.insert({timestamp: 2})
+// testHeap.insert({timestamp: 1})
+
+// // console.log(testHeap.arr);
+module.exports = fakeDb;
