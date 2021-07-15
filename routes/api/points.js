@@ -11,6 +11,8 @@ router.get("/", (req, res) => {
 
 //Add transaction route
 router.post("/add", (req, res) => {
+    console.log("Adding transaction: ", req.body)
+    fakeDb.addTransaction(req.body)
     return res.status(200).send({
         message: 'Added points'
     })
@@ -25,9 +27,8 @@ router.post("/spend", (req, res) => {
 
 //Route for getting all users
 router.get("/all", (req, res) => {
-    return res.status(200).send({
-        message: 'Returning points'
-    })
+    console.log("Getting all balances")
+    return res.json(fakeDb.allBalances());
 })
 
 module.exports = router;

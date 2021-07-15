@@ -75,22 +75,25 @@ class Db{
     }
 
     //assume transaction object will be {payer: "", points: "", timestamp: ""}
-    add_transaction(transaction){
+    addTransaction(transaction){
         if(transaction.payer in this.payers){
             this.payers[transaction.payer] += transaction.points;   //Might need to convert to int from str
+        }
+        else{
+            this.payers[transaction.payer] = transaction.points;
         }
         this.transactions.insert(transaction)
     }
 
-    spend_points(){
-
-    }
-
-    all_balances(){
+    spendPoints(){
         return this.payers;
     }
 
-    print_test(){
+    allBalances(){
+        return this.payers;
+    }
+
+    printTest(){
         console.log("Hello")
     }
 }
