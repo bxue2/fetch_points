@@ -98,6 +98,7 @@ class Db{
             if(currTrans.points > remain){
                 currTrans.points -= remain;
                 this.transactions.insert(currTrans)
+                remain = 0;
             }
             else{
                 remain -= currTrans.points;
