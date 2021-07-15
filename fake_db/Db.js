@@ -93,8 +93,8 @@ class Db{
         return this.payers;
     }
 
-    printTest(){
-        console.log("Hello")
+    allTransactions(){
+        return this.transactions.arr.slice(1);
     }
 }
 
