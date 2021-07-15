@@ -1,7 +1,25 @@
+//Using Heap structure to store transactions (to get newest order?)
+class minHeap{
+    constructor(){
+        this.arr = [null];
+    }
+
+    getMin(){
+        return this.arr[1];
+    }
+
+    insert(item){
+        this.arr.push(item);
+
+        //Bubble up to correct spot
+        
+    }
+}
+
 class Db{
     constructor(){
         this.payers = {}      //will contain "Username: Total Points"
-        this.transactions = []   //will be used to store transaction history (maybe use heap instead?)
+        this.transactions = new minHeap();  //will be used to store transaction history (maybe use heap instead for optimization)
                             //bit confused, if subtracting brings it negative, should transaction be removed
     }
 
@@ -10,7 +28,11 @@ class Db{
         if(transaction.payer in this.payers){
             this.payers[transaction.payer] += transaction.points;   //Might need to convert to int from str
         }
-        this.transactions.push(transaction)
+        this.transactions.insert(transaction)
+    }
+
+    spend_points(){
+
     }
 
     all_balances(){
