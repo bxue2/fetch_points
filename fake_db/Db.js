@@ -65,12 +65,17 @@ class minHeap{
 
         return popped;
     }
+
+    isEmpty(){
+        return this.arr.length <= 1;
+    }
 }
 
 class Db{
     constructor(){
         this.payers = {}      //will contain "Username: Total Points"
-        this.transactions = new minHeap();  //will be used to store transaction history (maybe use heap instead for optimization)
+                              //could remove this and just loop through transactions too for better memory but slower speed
+        this.transactions = new minHeap();  //will be used to store transaction history (use heap for optimization)
                             //bit confused, if subtracting brings it negative, should transaction be removed
     }
 
@@ -85,8 +90,19 @@ class Db{
         this.transactions.insert(transaction)
     }
 
-    spendPoints(){
-        return this.payers;
+    spendPoints(total){
+        let remain = total;
+        while(remain > 0 && !this.transactions.isEmpty()){
+            let currTrans = this.transactions.pop();
+            //Handling remainders
+            if(currTrans.points > remain){
+                currTrans.points -= remain;
+                this.transactions.insert(currTrans)
+            }
+            else{
+                remain -= currTrans.points;
+            }
+        }
     }
 
     allBalances(){

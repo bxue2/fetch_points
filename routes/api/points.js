@@ -21,6 +21,9 @@ router.post("/add", (req, res) => {
 
 //Spend points route
 router.post("/spend", (req, res) => {
+    let {points} = req.body;
+    fakeDb.spendPoints(points);
+    
     return res.status(200).send({
         message: 'Spent points'
     })
