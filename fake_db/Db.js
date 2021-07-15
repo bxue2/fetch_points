@@ -4,7 +4,7 @@ class minHeap{
         this.arr = [null];
     }
 
-    getMin(){
+    peek(){
         return this.arr[1];
     }
 
@@ -24,6 +24,46 @@ class minHeap{
                 currIdx = Math.floor(currIdx/2)
             }
         }
+    }
+
+    pop(){
+        let popped = this.arr[1]
+        //Need to move last element to root, then bubble down
+        let last = this.arr.pop();
+        this.arr[1] = last;
+        if(this.arr.length > 2){
+            //edge case if there's only 2 nodes left in heap
+            if(this.arr.length === 3){
+                if(this.arr[2] < this.arr[1]){
+                    [this.arr[1], this.arr[2]] = [this.arr[2], this.arr[1]]
+                }
+            }
+            else{
+                let currIdx = 1;
+                let leftChild = 2;
+                let rightChild = 3;
+                while(this.arr[leftChild] && this.arr[rightChild] && (
+                    this.arr[currIdx].timestamp > this.arr[leftChild].timestamp ||
+                    this.arr[currIdx].timestamp > this.arr[rightChild].timestamp
+                )){
+
+                    //Swap with the smaller child
+                    if(this.arr[leftChild].timestamp < this.arr[rightChild].timestamp){
+                        [this.arr[currIdx], this.arr[leftChild]] = [this.arr[leftChild], this.arr[currIdx]]
+                        currIdx = leftChild;
+                    }
+                    else{
+                        [this.arr[currIdx], this.arr[rightChild]] = [this.arr[rightChild], this.arr[currIdx]]
+                        currIdx = rightChild;
+                    }
+
+                    leftChild = currIdx * 2;
+                    rightChild = (currIdx * 2) + 1;
+                }
+            }
+        }
+
+        return popped;
     }
 }
 
@@ -57,6 +97,8 @@ class Db{
 
 let fakeDb = new Db()
 
+//Testing minHeap implementation
+
 // let testHeap = new minHeap()
 // testHeap.insert({timestamp: 5})
 // testHeap.insert({timestamp: 4})
@@ -64,5 +106,12 @@ let fakeDb = new Db()
 // testHeap.insert({timestamp: 2})
 // testHeap.insert({timestamp: 1})
 
-// // console.log(testHeap.arr);
+// console.log(testHeap.arr);
+
+// console.log(testHeap.pop());
+// console.log(testHeap.arr);
+
+// console.log(testHeap.pop());
+// console.log(testHeap.arr);
+
 module.exports = fakeDb;
