@@ -97,7 +97,7 @@ class Db{
         let remain = total;
         while(remain > 0 && !this.transactions.isEmpty()){
             let currTrans = this.transactions.pop();
-            console.log("Current: ", currTrans)
+            // console.log("Current: ", currTrans)
             //Handling remainders
             if(currTrans.points > remain){
                 currTrans.points -= remain;
@@ -123,20 +123,20 @@ let fakeDb = new Db()
 
 //Testing minHeap implementation
 
-let testHeap = new minHeap()
-testHeap.insert({timestamp: 5})
+// let testHeap = new minHeap()
+// testHeap.insert({timestamp: 5})
 // testHeap.insert({timestamp: 4})
 // testHeap.insert({timestamp: 3})
 // testHeap.insert({timestamp: 2})
 // testHeap.insert({timestamp: 1})
 
-console.log(testHeap.arr);
+// console.log(testHeap.arr);
 
-testHeap.pop();
-console.log("After first pop:" , testHeap.arr);
-testHeap.insert({timestamp: 5})
-console.log(testHeap.arr);
-testHeap.pop();
-console.log(testHeap.arr);
+// testHeap.pop();
+// console.log("After first pop:" , testHeap.arr);
+// testHeap.insert({timestamp: 5})
+// console.log(testHeap.arr);
+// testHeap.pop();
+// console.log(testHeap.arr);
 
 module.exports = fakeDb;
