@@ -27,6 +27,9 @@ class minHeap{
     }
 
     pop(){
+        if(this.arr.length === 2){
+            return this.arr.pop();
+        }
         let popped = this.arr[1]
         //Need to move last element to root, then bubble down
         let last = this.arr.pop();
@@ -76,13 +79,13 @@ class Db{
         this.payers = {}      //will contain "Username: Total Points"
                               //could remove this and just loop through transactions too for better memory but slower speed
         this.transactions = new minHeap();  //will be used to store transaction history (use heap for optimization)
-                            //bit confused, if subtracting brings it negative, should transaction be removed
+                            //bit confused on this, if subtracting brings it negative, should transaction be removed
     }
 
     //assume transaction object will be {payer: "", points: "", timestamp: ""}
     addTransaction(transaction){
         if(transaction.payer in this.payers){
-            this.payers[transaction.payer] += transaction.points;   //Might need to convert to int from str
+            this.payers[transaction.payer] += transaction.points;
         }
         else{
             this.payers[transaction.payer] = transaction.points;
@@ -94,6 +97,7 @@ class Db{
         let remain = total;
         while(remain > 0 && !this.transactions.isEmpty()){
             let currTrans = this.transactions.pop();
+            console.log("Current: ", currTrans)
             //Handling remainders
             if(currTrans.points > remain){
                 currTrans.points -= remain;
@@ -119,19 +123,20 @@ let fakeDb = new Db()
 
 //Testing minHeap implementation
 
-// let testHeap = new minHeap()
-// testHeap.insert({timestamp: 5})
+let testHeap = new minHeap()
+testHeap.insert({timestamp: 5})
 // testHeap.insert({timestamp: 4})
 // testHeap.insert({timestamp: 3})
 // testHeap.insert({timestamp: 2})
 // testHeap.insert({timestamp: 1})
 
-// console.log(testHeap.arr);
+console.log(testHeap.arr);
 
-// console.log(testHeap.pop());
-// console.log(testHeap.arr);
-
-// console.log(testHeap.pop());
-// console.log(testHeap.arr);
+testHeap.pop();
+console.log("After first pop:" , testHeap.arr);
+testHeap.insert({timestamp: 5})
+console.log(testHeap.arr);
+testHeap.pop();
+console.log(testHeap.arr);
 
 module.exports = fakeDb;

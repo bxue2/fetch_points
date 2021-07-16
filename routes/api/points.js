@@ -13,7 +13,8 @@ router.get("/", (req, res) => {
 //Assuming that only one transaction is passed in at a time (no bulk adds)
 router.post("/add", (req, res) => {
     console.log("Adding transaction: ", req.body)
-    fakeDb.addTransaction(req.body)
+    const {payer, points, timestamp} = req.body;
+    fakeDb.addTransaction({payer, points, timestamp: Date.parse(timestamp)})
     return res.status(200).send({
         message: 'Added points'
     })
