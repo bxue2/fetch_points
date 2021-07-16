@@ -1,7 +1,10 @@
 # fetch_points
 
 ## Instructions:
+"npm install" to install node dependencies
+
 Run "node app.js" to open server
+
 The server defaults to localhost:5000, to change the port number, modify "const port = <#>" in app.js
 API assumes incoming data is sent in application/json format
 
