@@ -3,7 +3,7 @@
 ## Instructions:
 "npm install" to install node dependencies
 
-Run "node app.js" to open server
+Run "node app.js" to open Express server
 
 The server defaults to localhost:5000, to change the port number, modify "const port = <#>" in app.js
 
