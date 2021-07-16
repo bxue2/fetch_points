@@ -72,24 +72,17 @@ class minHeap{
     isEmpty(){
         return this.arr.length <= 1;
     }
+
 }
 
 class Db{
     constructor(){
-        this.payers = {}      //will contain "Username: Total Points"
-                              //could remove this and just loop through transactions too for better memory but slower speed
         this.transactions = new minHeap();  //will be used to store transaction history (use heap for optimization)
                             //bit confused on this, if subtracting brings it negative, should transaction be removed
     }
 
     //assume transaction object will be {payer: "", points: "", timestamp: ""}
     addTransaction(transaction){
-        if(transaction.payer in this.payers){
-            this.payers[transaction.payer] += transaction.points;
-        }
-        else{
-            this.payers[transaction.payer] = transaction.points;
-        }
         this.transactions.insert(transaction)
     }
 
@@ -111,7 +104,17 @@ class Db{
     }
 
     allBalances(){
-        return this.payers;
+        let payers = {}
+        for(let i = 1; i < this.transactions.arr.length; i++){
+            let currTrans = this.transactions.arr[i];
+            if(currTrans.payer in payers){
+                payers[currTrans.payer] += currTrans.points;
+            }
+            else{
+                payers[currTrans.payer] = currTrans.points;
+            }
+        }
+        return payers;
     }
 
     allTransactions(){
